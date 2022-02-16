@@ -1,0 +1,73 @@
+package com.infobip.urlshortener.domain;
+
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.infobip.urlshortener.domain.URLStatistics;
+
+@Entity
+@Table(name = "url_links")
+public class URLinks {
+
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  private String id;
+
+  @Column(name = "original_url")
+  private String originalUrl;
+
+  @Column(name = "short_url")
+  private String shortUrl;
+
+  @OneToMany(mappedBy = "urlStatisticsId.urlId")
+  private List<URLStatistics> statistics;
+
+  public URLinks(final String originalUrl, final String shortUrl) {
+    this.originalUrl = originalUrl;
+    this.shortUrl = shortUrl;
+  }
+
+  public URLinks() {
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
+  public String getOriginalUrl() {
+    return originalUrl;
+  }
+
+  public void setOriginalUrl(final String originalUrl) {
+    this.originalUrl = originalUrl;
+  }
+
+  public String getShortUrl() {
+    return shortUrl;
+  }
+
+  public void setShortUrl(final String shortUrl) {
+    this.shortUrl = shortUrl;
+  }
+
+  public List<URLStatistics> getStatistics() {
+    return statistics;
+  }
+
+  public void setStatistics(final List<URLStatistics> statistics) {
+    this.statistics = statistics;
+  }
+}
