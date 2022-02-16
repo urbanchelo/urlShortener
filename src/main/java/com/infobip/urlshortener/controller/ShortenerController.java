@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.infobip.urlshortener.dto.url.URLRequestDto;
 import com.infobip.urlshortener.dto.url.URLResponseDto;
 import com.infobip.urlshortener.service.AccountService;
-import com.infobip.urlshortener.service.URLService;
+import com.infobip.urlshortener.service.ShortenerService;
 import com.infobip.urlshortener.validator.RequestParamValidator;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.valueOf;
 
 @RestController
-public class URLController {
+public class ShortenerController {
 
-  private final URLService urlService;
+  private final ShortenerService shortenerService;
   private final AccountService accountService;
   private final RequestParamValidator paramValidator;
 
-  public URLController(final URLService urlService, final AccountService accountService, final RequestParamValidator paramValidator) {
-    this.urlService = urlService;
+  public ShortenerController(final ShortenerService shortenerService, final AccountService accountService, final RequestParamValidator paramValidator) {
+    this.shortenerService = shortenerService;
     this.accountService = accountService;
     this.paramValidator = paramValidator;
   }
@@ -37,7 +37,7 @@ public class URLController {
     // todo proper authentication
     if (accountService.accountExists(accountId)) {
       paramValidator.checkURLRequestBody(dto);
-      return new ResponseEntity<>(urlService.shortUrl(dto), valueOf(dto.getRedirectType()));
+      return new ResponseEntity<>(shortenerService.shortUrl(dto), valueOf(dto.getRedirectType()));
     }
 
     throw new RuntimeException("User not found!");
@@ -47,7 +47,7 @@ public class URLController {
   public void shorUrl(@PathVariable String uuid, @RequestHeader(AUTHORIZATION) String accountId, HttpServletResponse response) throws IOException {
     // todo proper authentication
     if (accountService.accountExists(accountId)) {
-      var found = urlService.getOriginalUrl(uuid, accountId);
+      var found = shortenerService.getOriginalUrl(uuid, accountId);
       response.sendRedirect(found);
     }
 

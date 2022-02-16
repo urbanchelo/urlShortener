@@ -6,24 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "url_statistics")
-public class URLStatistics {
+@Table(name = "statistics")
+public class Statistics {
 
   @EmbeddedId
-  private URLStatisticsId urlStatisticsId;
+  private StatisticsId statisticsId;
 
   @Column(name = "calls_count")
   private int callCount;
 
-  public URLStatistics() {
+  public Statistics() {
   }
 
-  public URLStatisticsId getUrlStatisticsId() {
-    return urlStatisticsId;
+  public StatisticsId getUrlStatisticsId() {
+    return statisticsId;
   }
 
-  public void setUrlStatisticsId(final URLStatisticsId urlStatisticsId) {
-    this.urlStatisticsId = urlStatisticsId;
+  public void setUrlStatisticsId(final StatisticsId statisticsId) {
+    this.statisticsId = statisticsId;
   }
 
   public int getCallCount() {

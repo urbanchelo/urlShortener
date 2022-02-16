@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class URLStatisticsId implements Serializable {
+public class StatisticsId implements Serializable {
 
   @Column(name = "account_id")
   private String accountId;
@@ -16,10 +16,10 @@ public class URLStatisticsId implements Serializable {
   @JoinColumn(name = "url_id", referencedColumnName = "id")
   private URLinks urlId;
 
-  public URLStatisticsId() {
+  public StatisticsId() {
   }
 
-  public URLStatisticsId(final String accountId, final URLinks urlId) {
+  public StatisticsId(final String accountId, final URLinks urlId) {
     this.accountId = accountId;
     this.urlId = urlId;
   }

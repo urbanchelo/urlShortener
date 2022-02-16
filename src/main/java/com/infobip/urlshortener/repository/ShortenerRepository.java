@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.infobip.urlshortener.domain.URLinks;
 
-public interface URLRepository extends CrudRepository<URLinks, String> {
+public interface ShortenerRepository extends CrudRepository<URLinks, String> {
 
   Optional<URLinks> findByOriginalUrl(String originalUrl);
 

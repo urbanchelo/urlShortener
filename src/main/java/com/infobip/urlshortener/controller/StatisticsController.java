@@ -2,7 +2,6 @@ package com.infobip.urlshortener.controller;
 
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,18 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infobip.urlshortener.service.AccountService;
-import com.infobip.urlshortener.service.URLStatisticsService;
+import com.infobip.urlshortener.service.StatisticsService;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("statistic")
-public class URLStatisticsController {
+public class StatisticsController {
 
-  private final URLStatisticsService urlStatisticsService;
+  private final StatisticsService statisticsService;
   private final AccountService accountService;
 
-  public URLStatisticsController(final URLStatisticsService urlStatisticsService, final AccountService accountService) {
-    this.urlStatisticsService = urlStatisticsService;
+  public StatisticsController(final StatisticsService statisticsService, final AccountService accountService) {
+    this.statisticsService = statisticsService;
     this.accountService = accountService;
   }
 
@@ -32,7 +32,7 @@ public class URLStatisticsController {
 
     // todo proper authentication
     if (accountService.accountExists(accountId)) {
-      return new ResponseEntity<>(urlStatisticsService.getStatisticsForAccount(accountId), HttpStatus.OK);
+      return new ResponseEntity<>(statisticsService.getStatisticsForAccount(accountId), OK);
     }
 
     throw new RuntimeException("User not found!");

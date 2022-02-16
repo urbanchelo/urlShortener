@@ -11,7 +11,7 @@ CREATE TABLE url_links
     short_url    VARCHAR NOT NULL
 );
 
-CREATE TABLE url_statistics
+CREATE TABLE statistics
 (
     account_id  VARCHAR NOT NULL,
     url_id      VARCHAR NOT NULL,

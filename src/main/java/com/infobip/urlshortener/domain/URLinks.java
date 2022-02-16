@@ -10,8 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.infobip.urlshortener.domain.URLStatistics;
-
 @Entity
 @Table(name = "url_links")
 public class URLinks {
@@ -28,8 +26,8 @@ public class URLinks {
   @Column(name = "short_url")
   private String shortUrl;
 
-  @OneToMany(mappedBy = "urlStatisticsId.urlId")
-  private List<URLStatistics> statistics;
+  @OneToMany(mappedBy = "statisticsId.urlId")
+  private List<Statistics> statistics;
 
   public URLinks(final String originalUrl, final String shortUrl) {
     this.originalUrl = originalUrl;
@@ -63,11 +61,11 @@ public class URLinks {
     this.shortUrl = shortUrl;
   }
 
-  public List<URLStatistics> getStatistics() {
+  public List<Statistics> getStatistics() {
     return statistics;
   }
 
-  public void setStatistics(final List<URLStatistics> statistics) {
+  public void setStatistics(final List<Statistics> statistics) {
     this.statistics = statistics;
   }
 }
