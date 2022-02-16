@@ -42,9 +42,7 @@ public class AccountService {
    * @return true if exists, otherwise false
    */
   public boolean accountExists(String accountId) {
-    var optionalAccount = accountRepository.findById(accountId);
-
-    return optionalAccount.isPresent();
+    return accountRepository.findById(accountId).isPresent();
   }
 
 }
