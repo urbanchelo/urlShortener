@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.infobip.urlshortener.dto.account.AccountRequestDto;
 import com.infobip.urlshortener.dto.account.AccountResponseDto;
 import com.infobip.urlshortener.service.AccountService;
+import com.infobip.urlshortener.validator.RequestParamValidator;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -16,9 +17,11 @@ import static org.springframework.http.HttpStatus.OK;
 public class AccountController {
 
   private final AccountService accountService;
+  private final RequestParamValidator paramValidator;
 
-  public AccountController(final AccountService accountService) {
+  public AccountController(final AccountService accountService, final RequestParamValidator paramValidator) {
     this.accountService = accountService;
+    this.paramValidator = paramValidator;
   }
 
   /**
@@ -29,6 +32,7 @@ public class AccountController {
    */
   @PostMapping
   public ResponseEntity<AccountResponseDto> createAccount(@RequestBody AccountRequestDto dto) {
+    paramValidator.checkAccountRequestBody(dto);
     return new ResponseEntity<>(accountService.save(dto), OK);
   }
 

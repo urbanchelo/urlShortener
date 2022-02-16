@@ -2,14 +2,14 @@ package com.infobip.urlshortener.dto.account;
 
 public class AccountRequestDto {
 
-  private String id;
+  private String accountId;
 
-  public String getId() {
-    return id;
+  public String getAccountId() {
+    return accountId;
   }
 
-  public void setId(final String id) {
-    this.id = id;
+  public void setAccountId(final String accountId) {
+    this.accountId = accountId;
   }
 
 }

@@ -27,11 +27,11 @@ public class AccountService {
    * @return dto containing success flag, description and account password
    */
   public AccountResponseDto save(AccountRequestDto dto) {
-    if (accountExists(dto.getId())) {
+    if (accountExists(dto.getAccountId())) {
       return new AccountResponseDto(false, "Account exists already!", null);
     }
 
-    var saved = accountRepository.save(new Account(dto.getId(), randomAlphanumeric(8)));
+    var saved = accountRepository.save(new Account(dto.getAccountId(), randomAlphanumeric(8)));
     return new AccountResponseDto(true, "Account has been open!", saved.getPassword());
   }
 
