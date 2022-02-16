@@ -1,4 +1,4 @@
-package com.infobip.urlshortener.dto;
+package com.infobip.urlshortener.dto.account;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;

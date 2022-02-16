@@ -1,4 +1,4 @@
-package com.infobip.urlshortener.dto;
+package com.infobip.urlshortener.dto.account;
 
 public class AccountRequestDto {
 

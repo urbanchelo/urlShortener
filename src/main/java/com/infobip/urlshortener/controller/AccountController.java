@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.infobip.urlshortener.dto.AccountRequestDto;
-import com.infobip.urlshortener.dto.AccountResponseDto;
+import com.infobip.urlshortener.dto.account.AccountRequestDto;
+import com.infobip.urlshortener.dto.account.AccountResponseDto;
 import com.infobip.urlshortener.service.AccountService;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -29,9 +29,7 @@ public class AccountController {
    */
   @PostMapping
   public ResponseEntity<AccountResponseDto> createAccount(@RequestBody AccountRequestDto dto) {
-    var saved = accountService.save(dto);
-
-    return new ResponseEntity<>(saved, OK);
+    return new ResponseEntity<>(accountService.save(dto), OK);
   }
 
 }
