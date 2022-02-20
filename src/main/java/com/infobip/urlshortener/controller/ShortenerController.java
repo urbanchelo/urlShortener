@@ -16,6 +16,7 @@ import com.infobip.urlshortener.dto.url.URLResponseDto;
 import com.infobip.urlshortener.service.AccountService;
 import com.infobip.urlshortener.service.ShortenerService;
 import com.infobip.urlshortener.validator.RequestParamValidator;
+import io.swagger.annotations.ApiOperation;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.valueOf;
 
@@ -32,8 +33,9 @@ public class ShortenerController {
     this.paramValidator = paramValidator;
   }
 
+  @ApiOperation(value = "Endpoint for shortening of URLs")
   @PostMapping("/register")
-  public ResponseEntity<URLResponseDto> shorUrl(@RequestBody URLRequestDto dto, @RequestHeader(AUTHORIZATION) String accountId) {
+  public ResponseEntity<URLResponseDto> shortenURL(@RequestBody URLRequestDto dto, @RequestHeader(AUTHORIZATION) String accountId) {
     // todo proper authentication
     if (accountService.accountExists(accountId)) {
       paramValidator.checkURLRequestBody(dto);
@@ -43,8 +45,10 @@ public class ShortenerController {
     throw new RuntimeException("User not found!");
   }
 
+  @ApiOperation(value = "Redirects to original url mapped to shorten URL", notes = "Saves statistics of user usage")
   @GetMapping("/{uuid}")
-  public void shorUrl(@PathVariable String uuid, @RequestHeader(AUTHORIZATION) String accountId, HttpServletResponse response) throws IOException {
+  public void redirectToOriginalURL(@PathVariable String uuid, @RequestHeader(AUTHORIZATION) String accountId, HttpServletResponse response)
+      throws IOException {
     // todo proper authentication
     if (accountService.accountExists(accountId)) {
       var found = shortenerService.getOriginalUrl(uuid, accountId);

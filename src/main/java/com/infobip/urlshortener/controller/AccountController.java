@@ -10,6 +10,7 @@ import com.infobip.urlshortener.dto.account.AccountRequestDto;
 import com.infobip.urlshortener.dto.account.AccountResponseDto;
 import com.infobip.urlshortener.service.AccountService;
 import com.infobip.urlshortener.validator.RequestParamValidator;
+import io.swagger.annotations.ApiOperation;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -30,6 +31,7 @@ public class AccountController {
    * @param dto dto containing account id
    * @return dto with success flag, description and account password in case it's created
    */
+  @ApiOperation(value = "Create new account when when account doesn't exist", notes = "Generates password when new account")
   @PostMapping
   public ResponseEntity<AccountResponseDto> createAccount(@RequestBody AccountRequestDto dto) {
     paramValidator.checkAccountRequestBody(dto);

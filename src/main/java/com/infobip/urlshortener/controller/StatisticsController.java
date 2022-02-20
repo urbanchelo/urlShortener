@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infobip.urlshortener.service.AccountService;
 import com.infobip.urlshortener.service.StatisticsService;
+import io.swagger.annotations.ApiOperation;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -26,12 +27,13 @@ public class StatisticsController {
     this.accountService = accountService;
   }
 
+  @ApiOperation(value = "Get user statistics containing number of calls per URL")
   @GetMapping("/{accountId}")
   public ResponseEntity<Map<String, Integer>> getStatisticsForAccount(@RequestHeader(AUTHORIZATION) String authorizationHeader,
       @PathVariable("accountId") String accountId) {
 
     // todo proper authentication
-    if (accountService.accountExists(accountId)) {
+    if (accountService.accountExists(authorizationHeader)) {
       return new ResponseEntity<>(statisticsService.getStatisticsForAccount(accountId), OK);
     }
 
