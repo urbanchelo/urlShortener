@@ -2,6 +2,7 @@ package com.infobip.urlshortener.security;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,9 +25,13 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
     String name = authentication.getName();
     String password = authentication.getCredentials().toString();
 
+    if (Strings.isEmpty(name)) {
+      throw new UnauthorizedException("Account id is missing");
+    }
+
     var userDetails = userDetailsService.loadUserByUsername(name);
 
-    if (!name.equals(userDetails.getUsername()) || !password.equals(userDetails.getPassword())) {
+    if (!userDetails.getUsername().equals(name) || !userDetails.getPassword().equals(password)) {
       throw new UnauthorizedException("Invalid credentials");
     }
 

@@ -22,7 +22,7 @@ public class Statistics {
 
   @ManyToOne
   @JoinColumn(name = "url_id", referencedColumnName = "id")
-  private URLinks urlLinks;
+  private URLLinks urlLinks;
 
   @Column(name = "calls_count")
   private int callCount;
@@ -30,7 +30,7 @@ public class Statistics {
   public Statistics() {
   }
 
-  public Statistics(final URLinks urlLinks, final int callCount) {
+  public Statistics(final URLLinks urlLinks, final int callCount) {
     this.urlLinks = urlLinks;
     this.callCount = callCount;
   }
@@ -43,15 +43,15 @@ public class Statistics {
     this.id = id;
   }
 
-  public Statistics(final URLinks urlLinks) {
+  public Statistics(final URLLinks urlLinks) {
     this.urlLinks = urlLinks;
   }
 
-  public URLinks getUrlLinks() {
+  public URLLinks getUrlLinks() {
     return urlLinks;
   }
 
-  public void setUrlLinks(final URLinks urlId) {
+  public void setUrlLinks(final URLLinks urlId) {
     this.urlLinks = urlId;
   }
 

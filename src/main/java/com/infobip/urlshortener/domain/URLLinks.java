@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "url_links")
-public class URLinks {
+public class URLLinks {
 
   @Id
   @Column(name = "id")
@@ -29,12 +29,12 @@ public class URLinks {
   @OneToMany(mappedBy = "urlLinks")
   private List<Statistics> statistics;
 
-  public URLinks(final String originalUrl, final String shortUrl) {
+  public URLLinks(final String originalUrl, final String shortUrl) {
     this.originalUrl = originalUrl;
     this.shortUrl = shortUrl;
   }
 
-  public URLinks() {
+  public URLLinks() {
   }
 
   public String getId() {

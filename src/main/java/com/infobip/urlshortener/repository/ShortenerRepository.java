@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.infobip.urlshortener.domain.URLinks;
+import com.infobip.urlshortener.domain.URLLinks;
 
-public interface ShortenerRepository extends CrudRepository<URLinks, String> {
+public interface ShortenerRepository extends CrudRepository<URLLinks, String> {
 
-  Optional<URLinks> findByOriginalUrl(String originalUrl);
+  Optional<URLLinks> findByOriginalUrl(String originalUrl);
 
-  Optional<URLinks> findByShortUrl(String shortUrl);
+  Optional<URLLinks> findByShortUrl(String shortUrl);
 }
