@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.infobip.urlshortener.domain.Statistics;
-import com.infobip.urlshortener.domain.StatisticsId;
 import com.infobip.urlshortener.domain.URLinks;
 import com.infobip.urlshortener.dto.url.URLRequestDto;
 import com.infobip.urlshortener.dto.url.URLResponseDto;
+import com.infobip.urlshortener.exception.InvalidParamException;
 import com.infobip.urlshortener.repository.ShortenerRepository;
 import com.infobip.urlshortener.repository.StatisticsRepository;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
@@ -26,7 +26,7 @@ public class ShortenerService {
     this.statisticsRepository = statisticsRepository;
   }
 
-  public URLResponseDto shortUrl(URLRequestDto dto) {
+  public URLResponseDto shortentUrl(URLRequestDto dto) {
     var optionalUrlLinks = shortenerRepository.findByOriginalUrl(dto.getUrl());
 
     if (optionalUrlLinks.isEmpty()) {
@@ -38,27 +38,20 @@ public class ShortenerService {
     return null;
   }
 
-  public String getOriginalUrl(String uuid, String accountId) {
+  public String getOriginalUrl(String uuid) {
     var optionalUrlLinks = shortenerRepository.findByShortUrl(HTTP_SHORT_URL + uuid);
 
     if (optionalUrlLinks.isPresent()) {
-      var optionalStatistics = statisticsRepository.findByAccountIdAndUrlId(accountId, optionalUrlLinks.get().getId());
+      var optionalStatistics = statisticsRepository.findByUrlId(optionalUrlLinks.get().getId());
 
-      Statistics statistics;
-      if (optionalStatistics.isPresent()) {
-        statistics = optionalStatistics.get();
-        statistics.increaseCallsCount();
-      } else {
-        statistics = new Statistics();
-        statistics.setUrlStatisticsId(new StatisticsId(accountId, optionalUrlLinks.get()));
-        statistics.setCallCount(1);
-      }
+      Statistics statistics = optionalStatistics.orElseGet(() -> new Statistics(optionalUrlLinks.get()));
+      statistics.increaseCallsCount();
       statisticsRepository.save(statistics);
 
       return optionalUrlLinks.get().getOriginalUrl();
     }
 
-    return null;
+    throw new InvalidParamException("Record for current URL doesn't exist.");
   }
 
 }

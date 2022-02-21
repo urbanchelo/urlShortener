@@ -1,6 +1,5 @@
 package com.infobip.urlshortener.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +13,7 @@ public interface StatisticsRepository extends CrudRepository<Statistics, String>
 
   @Query(value = "SELECT * " +
       "FROM statistics us " +
-      "WHERE us.account_id = :accountId " +
-      "AND us.url_id = :urlId", nativeQuery = true)
-  Optional<Statistics> findByAccountIdAndUrlId(String accountId, String urlId);
+      "WHERE us.url_id = :urlId", nativeQuery = true)
+  Optional<Statistics> findByUrlId(String urlId);
 
-  @Query(value = "SELECT * " +
-      "FROM statistics us " +
-      "WHERE us.account_id = :accountId ", nativeQuery = true)
-  List<Statistics> findByAccountId(String accountId);
 }

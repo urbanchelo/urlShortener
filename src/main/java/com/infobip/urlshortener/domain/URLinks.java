@@ -26,7 +26,7 @@ public class URLinks {
   @Column(name = "short_url")
   private String shortUrl;
 
-  @OneToMany(mappedBy = "statisticsId.urlId")
+  @OneToMany(mappedBy = "urlLinks")
   private List<Statistics> statistics;
 
   public URLinks(final String originalUrl, final String shortUrl) {

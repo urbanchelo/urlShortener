@@ -5,9 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.infobip.urlshortener.domain.Statistics;
 import com.infobip.urlshortener.repository.StatisticsRepository;
-import static java.util.stream.Collectors.toMap;
 
 @Service
 public class StatisticsService {
@@ -18,15 +16,17 @@ public class StatisticsService {
     this.statisticsRepository = statisticsRepository;
   }
 
-  public Map<String, Integer> getStatisticsForAccount(String accountId) {
-    var statistics = statisticsRepository.findByAccountId(accountId);
+  public Map<String, Integer> getStatistics() {
+    var statistics = statisticsRepository.findAll();
+    var statisticsMap = new HashMap<String, Integer>();
+    var statisticsIterator = statistics.iterator();
 
-    if (!statistics.isEmpty()) {
-      return statistics.stream().collect(
-          toMap(stat -> stat.getUrlStatisticsId().getUrlId().getOriginalUrl(), Statistics::getCallCount, (a, b) -> b, HashMap::new));
+    while (statisticsIterator.hasNext()) {
+      var next = statisticsIterator.next();
+      statisticsMap.put(next.getUrlLinks().getOriginalUrl(), next.getCallCount());
     }
 
-    return new HashMap<>();
+    return statisticsMap;
   }
 
 }

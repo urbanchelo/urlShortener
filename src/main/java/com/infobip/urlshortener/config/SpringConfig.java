@@ -2,7 +2,6 @@ package com.infobip.urlshortener.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class SpringConfig {
 
-  @Autowired
-  DataSource dataSource;
+  private final DataSource dataSource;
+
+  public SpringConfig(final DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
   @Bean
   public JdbcTemplate getJdbcTemplate() {

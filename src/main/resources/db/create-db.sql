@@ -13,7 +13,6 @@ CREATE TABLE url_links
 
 CREATE TABLE statistics
 (
-    account_id  VARCHAR NOT NULL,
     url_id      VARCHAR NOT NULL,
     calls_count NUMBER  NOT NULL
 );

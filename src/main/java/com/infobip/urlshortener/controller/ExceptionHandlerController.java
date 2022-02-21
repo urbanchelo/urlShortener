@@ -2,14 +2,17 @@ package com.infobip.urlshortener.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.infobip.urlshortener.exception.DataNotFoundException;
 import com.infobip.urlshortener.exception.InvalidParamException;
+import com.infobip.urlshortener.exception.UnauthorizedException;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -34,11 +37,20 @@ public class ExceptionHandlerController {
 
   /**
    * @param exc exception that was thrown
-   * @return error response for general exceptions with 400 code
+   * @return error response for general exceptions with 404 code
    */
-  @ExceptionHandler({DataNotFoundException.class})
+  @ExceptionHandler({DataNotFoundException.class, UsernameNotFoundException.class})
   public ResponseEntity<ErrorDto> handleDataNotFoundException(Exception exc) {
     return this.getErrorMessage(exc, NOT_FOUND);
+  }
+
+  /**
+   * @param exc exception that was thrown
+   * @return error response for general exceptions with 401 code
+   */
+  @ExceptionHandler({UnauthorizedException.class})
+  public ResponseEntity<ErrorDto> handleUnauthorizedException(Exception exc) {
+    return this.getErrorMessage(exc, UNAUTHORIZED);
   }
 
   /**
