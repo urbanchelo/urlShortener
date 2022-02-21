@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.infobip.urlshortener.domain.Statistics;
-import com.infobip.urlshortener.domain.URLinks;
+import com.infobip.urlshortener.domain.URLLinks;
 import com.infobip.urlshortener.dto.url.URLRequestDto;
 import com.infobip.urlshortener.dto.url.URLResponseDto;
 import com.infobip.urlshortener.exception.InvalidParamException;
@@ -30,12 +30,12 @@ public class ShortenerService {
     var optionalUrlLinks = shortenerRepository.findByOriginalUrl(dto.getUrl());
 
     if (optionalUrlLinks.isEmpty()) {
-      var urlLinks = new URLinks(dto.getUrl(), HTTP_SHORT_URL + randomAlphanumeric(10));
+      var urlLinks = new URLLinks(dto.getUrl(), HTTP_SHORT_URL + randomAlphanumeric(10));
       var saved = shortenerRepository.save(urlLinks);
       return new URLResponseDto(saved.getShortUrl());
     }
 
-    return null;
+    return new URLResponseDto(optionalUrlLinks.get().getShortUrl());
   }
 
   public String getOriginalUrl(String uuid) {

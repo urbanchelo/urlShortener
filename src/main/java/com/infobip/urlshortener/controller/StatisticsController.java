@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.infobip.urlshortener.service.AccountService;
 import com.infobip.urlshortener.service.StatisticsService;
 import io.swagger.annotations.ApiOperation;
 import static org.springframework.http.HttpStatus.OK;
@@ -17,11 +16,9 @@ import static org.springframework.http.HttpStatus.OK;
 public class StatisticsController {
 
   private final StatisticsService statisticsService;
-  private final AccountService accountService;
 
-  public StatisticsController(final StatisticsService statisticsService, final AccountService accountService) {
+  public StatisticsController(final StatisticsService statisticsService) {
     this.statisticsService = statisticsService;
-    this.accountService = accountService;
   }
 
   @ApiOperation(value = "Get user statistics containing number of calls per URL")
