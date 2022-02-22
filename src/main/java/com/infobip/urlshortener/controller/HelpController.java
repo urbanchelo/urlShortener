@@ -22,7 +22,7 @@ public class HelpController {
         "    <li>JAR file is contained in 'root/target/urlShortener-0.0.1-SNAPSHOT.jar'</li>\n" +
         "    <li>Find this file through any kind of cmd/terminal and run command 'java -jar urlShortener-0.0.1-SNAPSHOT.jar'</li>\n" +
         "    <li>This will start up whole application</li>\n" +
-        "    <li>Add row (127.0.0.1 http://short.com/) you your host file</li>\n" +
+        "    <li>Add row (127.0.0.1 short.com) you your host file</li>\n" +
         "</ol>\n" +
         "\n" +
         "<h2>Usage</h2>\n" +
