@@ -9,21 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infobip.urlshortener.service.StatisticsService;
 import io.swagger.annotations.ApiOperation;
-import static org.springframework.http.HttpStatus.OK;
+import lombok.RequiredArgsConstructor;
+import static org.springframework.http.ResponseEntity.ok;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("statistic")
 public class StatisticsController {
 
   private final StatisticsService statisticsService;
 
-  public StatisticsController(final StatisticsService statisticsService) {
-    this.statisticsService = statisticsService;
-  }
-
   @ApiOperation(value = "Get user statistics containing number of calls per URL")
   @GetMapping()
   public ResponseEntity<Map<String, Integer>> getStatisticsForAccount() {
-    return new ResponseEntity<>(statisticsService.getStatistics(), OK);
+    return ok(statisticsService.getStatistics());
   }
 }

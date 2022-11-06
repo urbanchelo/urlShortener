@@ -10,6 +10,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "statistics")
 public class Statistics {
@@ -27,40 +34,9 @@ public class Statistics {
   @Column(name = "calls_count")
   private int callCount;
 
-  public Statistics() {
-  }
-
-  public Statistics(final URLLinks urlLinks, final int callCount) {
-    this.urlLinks = urlLinks;
-    this.callCount = callCount;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(final String id) {
-    this.id = id;
-  }
 
   public Statistics(final URLLinks urlLinks) {
     this.urlLinks = urlLinks;
-  }
-
-  public URLLinks getUrlLinks() {
-    return urlLinks;
-  }
-
-  public void setUrlLinks(final URLLinks urlId) {
-    this.urlLinks = urlId;
-  }
-
-  public int getCallCount() {
-    return callCount;
-  }
-
-  public void setCallCount(final int callCount) {
-    this.callCount = callCount;
   }
 
   public void increaseCallsCount() {

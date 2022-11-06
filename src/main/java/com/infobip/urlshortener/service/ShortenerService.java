@@ -10,8 +10,10 @@ import com.infobip.urlshortener.dto.url.URLResponseDto;
 import com.infobip.urlshortener.exception.InvalidParamException;
 import com.infobip.urlshortener.repository.ShortenerRepository;
 import com.infobip.urlshortener.repository.StatisticsRepository;
+import lombok.RequiredArgsConstructor;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class ShortenerService {
@@ -19,12 +21,6 @@ public class ShortenerService {
   public static final String HTTP_SHORT_URL = "http://short.com/";
   private final ShortenerRepository shortenerRepository;
   private final StatisticsRepository statisticsRepository;
-
-  public ShortenerService(final ShortenerRepository shortenerRepository,
-      final StatisticsRepository statisticsRepository) {
-    this.shortenerRepository = shortenerRepository;
-    this.statisticsRepository = statisticsRepository;
-  }
 
   public URLResponseDto shortentUrl(URLRequestDto dto) {
     var optionalUrlLinks = shortenerRepository.findByOriginalUrl(dto.getUrl());

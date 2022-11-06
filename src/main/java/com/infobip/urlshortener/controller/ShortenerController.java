@@ -15,18 +15,15 @@ import com.infobip.urlshortener.dto.url.URLResponseDto;
 import com.infobip.urlshortener.service.ShortenerService;
 import com.infobip.urlshortener.validator.RequestParamValidator;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import static org.springframework.http.HttpStatus.valueOf;
 
+@RequiredArgsConstructor
 @RestController
 public class ShortenerController {
 
   private final ShortenerService shortenerService;
   private final RequestParamValidator paramValidator;
-
-  public ShortenerController(final ShortenerService shortenerService, final RequestParamValidator paramValidator) {
-    this.shortenerService = shortenerService;
-    this.paramValidator = paramValidator;
-  }
 
   @ApiOperation(value = "Endpoint for shortening of URLs")
   @PostMapping("/register")

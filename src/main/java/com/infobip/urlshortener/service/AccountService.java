@@ -7,17 +7,15 @@ import com.infobip.urlshortener.domain.Account;
 import com.infobip.urlshortener.dto.account.AccountRequestDto;
 import com.infobip.urlshortener.dto.account.AccountResponseDto;
 import com.infobip.urlshortener.repository.AccountRepository;
+import lombok.RequiredArgsConstructor;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class AccountService {
 
   private final AccountRepository accountRepository;
-
-  public AccountService(final AccountRepository accountRepository) {
-    this.accountRepository = accountRepository;
-  }
 
   /**
    * Saves user entity to DB. If account isn't present in DB, generated password and success message is returned.

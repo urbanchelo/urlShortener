@@ -58,7 +58,7 @@ public class ExceptionHandlerController {
    * @return Error response for passed parameters with vague message
    */
   private ResponseEntity<ErrorDto> getErrorMessage(Exception exc, HttpStatus status) {
-    ErrorDto error = new ErrorDto();
+    var error = new ErrorDto();
     error.setMessage(exc.getMessage());
     error.setStatus(status.value());
 
@@ -66,7 +66,6 @@ public class ExceptionHandlerController {
   }
 
   private static class ErrorDto {
-
     private int status;
     private String message;
 

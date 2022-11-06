@@ -4,6 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Account {
 
@@ -14,27 +21,4 @@ public class Account {
   @Column(name = "password")
   private String password;
 
-  public Account() {
-  }
-
-  public Account(final String id, final String password) {
-    this.id = id;
-    this.password = password;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(final String id) {
-    this.id = id;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(final String email) {
-    this.password = email;
-  }
 }

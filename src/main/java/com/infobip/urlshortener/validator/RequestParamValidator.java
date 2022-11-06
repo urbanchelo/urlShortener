@@ -5,9 +5,11 @@ import org.springframework.stereotype.Component;
 import com.infobip.urlshortener.dto.account.AccountRequestDto;
 import com.infobip.urlshortener.dto.url.URLRequestDto;
 import com.infobip.urlshortener.exception.InvalidParamException;
+import static java.util.Objects.isNull;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 import static org.springframework.http.HttpStatus.FOUND;
 import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
+import static org.springframework.http.HttpStatus.valueOf;
 
 @Component
 public class RequestParamValidator {
@@ -18,12 +20,12 @@ public class RequestParamValidator {
     }
 
     var redirectType = dto.getRedirectType();
-    if (redirectType == null) {
+    if (isNull(redirectType)) {
       dto.setRedirectType(FOUND.value());
       return;
     }
 
-    if (FOUND.value() != redirectType && MOVED_PERMANENTLY.value() != redirectType) {
+    if (!FOUND.equals(valueOf(redirectType)) && !MOVED_PERMANENTLY.equals(valueOf(redirectType))) {
       throw new InvalidParamException("Redirect type is invalid.");
     }
   }
@@ -33,5 +35,4 @@ public class RequestParamValidator {
       throw new InvalidParamException("Mandatory field accountId is missing or empty");
     }
   }
-
 }

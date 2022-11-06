@@ -1,23 +1,12 @@
 package com.infobip.urlshortener.dto.url;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class URLRequestDto {
 
   private String url;
   private Integer redirectType;
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(final String url) {
-    this.url = url;
-  }
-
-  public Integer getRedirectType() {
-    return redirectType;
-  }
-
-  public void setRedirectType(final Integer redirectType) {
-    this.redirectType = redirectType;
-  }
 }

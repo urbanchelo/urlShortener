@@ -11,19 +11,15 @@ import com.infobip.urlshortener.dto.account.AccountResponseDto;
 import com.infobip.urlshortener.service.AccountService;
 import com.infobip.urlshortener.validator.RequestParamValidator;
 import io.swagger.annotations.ApiOperation;
-import static org.springframework.http.HttpStatus.OK;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("account")
 public class AccountController {
 
   private final AccountService accountService;
   private final RequestParamValidator paramValidator;
-
-  public AccountController(final AccountService accountService, final RequestParamValidator paramValidator) {
-    this.accountService = accountService;
-    this.paramValidator = paramValidator;
-  }
 
   /**
    * Endpoint for creating account.
@@ -35,7 +31,7 @@ public class AccountController {
   @PostMapping
   public ResponseEntity<AccountResponseDto> createAccount(@RequestBody AccountRequestDto dto) {
     paramValidator.checkAccountRequestBody(dto);
-    return new ResponseEntity<>(accountService.save(dto), OK);
+    return ResponseEntity.ok(accountService.save(dto));
   }
 
 }

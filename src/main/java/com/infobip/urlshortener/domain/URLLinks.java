@@ -10,6 +10,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "url_links")
 public class URLLinks {
@@ -34,38 +41,4 @@ public class URLLinks {
     this.shortUrl = shortUrl;
   }
 
-  public URLLinks() {
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(final String id) {
-    this.id = id;
-  }
-
-  public String getOriginalUrl() {
-    return originalUrl;
-  }
-
-  public void setOriginalUrl(final String originalUrl) {
-    this.originalUrl = originalUrl;
-  }
-
-  public String getShortUrl() {
-    return shortUrl;
-  }
-
-  public void setShortUrl(final String shortUrl) {
-    this.shortUrl = shortUrl;
-  }
-
-  public List<Statistics> getStatistics() {
-    return statistics;
-  }
-
-  public void setStatistics(final List<Statistics> statistics) {
-    this.statistics = statistics;
-  }
 }
