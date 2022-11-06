@@ -9,6 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Internal repo</name>
+            <url>file://${user.home}/.m2/repository</url>
+        </repository>
+    </distributionManagement>
+
     <groupId>com.infobip</groupId>
     <artifactId>urlShortener</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -41,6 +49,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring JDBC -->
