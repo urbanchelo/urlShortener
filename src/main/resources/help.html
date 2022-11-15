@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>URL Shortener</h1>
+<h2>Installation</h2>
+
+<ol>
+    <li>Run 'mvn clean package' to create executable JAR file</li>
+    <li>JAR file is contained in 'root/target/urlShortener-0.0.1-SNAPSHOT.jar'</li>
+    <li>Find this file through any kind of cmd/terminal and run command 'java -jar urlShortener-0.0.1-SNAPSHOT.jar'</li>
+    <li>This will start up whole application</li>
+    <li>Add row (127.0.0.1 http://short.com/) you your host file</li>
+</ol>
+
+<h2>Usage</h2>
+
+<ol>
+    <li>Swagger documentation can be found at 'localhost:8080/swagger-ui/index.html'. Here you can find documentation to all endpoints</li>
+    <li>For using app, user need account</li>
+    <li>Once account is create, endpoints are using basic auth (name/password), but there are exceptions like 'swagger-ui/index.html' or '/help'</li>
+    <li>For shortening of URL please use '/register' endpoint, which will return short version of URL</li>
+    <li>Short URL has 2 parts: base (http://short.com/) and uuid (random 10 alphanumeric characters), in result (http://short.com/uikj215ll9)</li>
+    <li>To be redirected to original URL, you need to add port after http://short.com, so it will look like this (http://short.com:port/uikj215ll9)</li>
+    <li>Everytime short URL is called statistcs are incremented and are available at /statistic</li>
+</ol>
+
+</body>
+</html>
+

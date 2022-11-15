@@ -50,6 +50,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
   public void configure(WebSecurity web) {
     web.ignoring()
         .antMatchers("/resources/**")
+        .antMatchers("/swagger-ui/**")
+        .antMatchers("/swagger-ui/index.html")
+        .antMatchers("/swagger-ui.html")
+        .antMatchers("/v3/api-docs/**")
+        .antMatchers("/v3/api-docs.yaml")
         .antMatchers("/account")
         .antMatchers("/help")
         .antMatchers("/h2-console/**");

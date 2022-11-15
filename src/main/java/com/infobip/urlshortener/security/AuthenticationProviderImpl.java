@@ -22,8 +22,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    String name = authentication.getName();
-    String password = authentication.getCredentials().toString();
+    var name = authentication.getName();
+    var password = authentication.getCredentials().toString();
 
     if (Strings.isEmpty(name)) {
       throw new UnauthorizedException("Account id is missing");
